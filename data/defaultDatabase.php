@@ -45,6 +45,7 @@ return [
             'tutorial_shown_at' => Types::DATETIMETZ_IMMUTABLE,
             'type' => Types::INTEGER,
             'is_verified' => Types::BOOLEAN,
+            'token' => Types::STRING,
         ],
         'values' => [
             [
@@ -57,6 +58,7 @@ return [
                 'type' => 1,
                 'is_verified' => true,
                 'id' => 'capito|123',
+                'token' => '01J2FDAXFVW2NHBC9G0F5CA94P'
             ],
             [
                 'email' => 'jane.doe@example.com',
@@ -68,6 +70,7 @@ return [
                 'type' => 1,
                 'is_verified' => false,
                 'id' => 'capito|234',
+                'token' => '01J2FDBBTB0VCHRDQFM61HZ7A7'
             ],
         ],
     ],
