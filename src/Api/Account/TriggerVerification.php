@@ -28,6 +28,7 @@ final readonly class TriggerVerification extends AuthorizeAccountId
     {
         /** @var User|null $user */
         $user = $request->getAttribute('user');
+        // @todo isAdmin check only for Team
         if ($user === null || $user->isAdmin() === false) {
             return $response
                 ->withStatus(401)
