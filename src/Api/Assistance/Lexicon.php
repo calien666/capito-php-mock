@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Capito\Assistance;
+namespace Capito\Api\Assistance;
 
 use Capito\Authorization\AuthorizeAccountId;
 use Psr\Http\Message\ResponseInterface;
@@ -26,8 +26,8 @@ final readonly class Lexicon extends AuthorizeAccountId
                             'length' => 13,
                         ],
                     ],
+                    'description' => '\'capito digital\'\' is a product of the atempo GesmbH aimed at \nhelping write understandable texts.',
                 ],
-                'description' => '\'capito digital\'\' is a product of the atempo GesmbH aimed at \nhelping write understandable texts.',
             ],
         ];
         return $response->withJson($lexicon);

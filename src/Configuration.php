@@ -6,5 +6,8 @@ namespace Capito;
 
 class Configuration
 {
-
+    public static function getAppDir(): string
+    {
+        return __DIR__ . '/../.';
+    }
 }

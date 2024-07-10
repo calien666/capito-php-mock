@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Capito\Api\Account;
 
-class AbstractAccount
+use Capito\AbstractRequestHandler;
+
+abstract readonly class AbstractAccount extends AbstractRequestHandler
 {
 
 }

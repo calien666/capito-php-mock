@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Capito\Api\Account;
 
-use Capito\Authorization\AuthorizeAccountId;
+use Capito\AbstractRequestHandler;
 use Capito\DatabaseTrait;
+use Doctrine\DBAL\Types\Types;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final readonly class TriggerVerification extends AuthorizeAccountId
+// don't use AuthorizeAuthId, as on this point we don't want to
+
+/**
+ * @verification none
+ * @api /v2/account/verify
+ */
+final readonly class Verify extends AbstractRequestHandler
 {
     use DatabaseTrait;
 
@@ -34,8 +41,9 @@ final readonly class TriggerVerification extends AuthorizeAccountId
 
         $queryBuilder = $this->connection->createQueryBuilder();
 
+        // Fetch the verification token
         $statement = $queryBuilder
-            ->select('*')
+            ->select('users.*')
             ->from('token')
             ->join(
                 'token',
@@ -46,6 +54,8 @@ final readonly class TriggerVerification extends AuthorizeAccountId
             ->where('token.token', $queryBuilder->createNamedParameter($token))
             ->setMaxResults(1);
         $result = $statement->executeQuery()->fetchOne();
+
+        // return 404 if token not found
         if ($result === false) {
             $response->write('Not Found (token does not exist)');
             return $response
@@ -53,7 +63,26 @@ final readonly class TriggerVerification extends AuthorizeAccountId
                 ->withHeader('Content-Type', 'text/plain');
         }
 
-        return $response
-            ->withStatus(204);
+        // update user status to verified
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder
+            ->update('users')
+            ->set('is_verified', $queryBuilder->createNamedParameter(true,Types::BOOLEAN))
+            ->where(
+                $queryBuilder->expr()->eq('account_id', $queryBuilder->createNamedParameter($result['account_id'], Types::STRING))
+            )
+            ->executeStatement();
+
+        // delete token entry from database
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder
+            ->delete('token')
+            ->where(
+                $queryBuilder->expr()->eq('user', $queryBuilder->createNamedParameter($result['account_id'])),
+                $queryBuilder->expr()->eq('token', $queryBuilder->createNamedParameter($token)),
+            )
+            ->executeStatement();
+
+        return $response->withStatus(204);
     }
 }

@@ -11,7 +11,7 @@ use Doctrine\DBAL\Tools\DsnParser;
 use Doctrine\DBAL\Types\Type;
 
 // we do NOT use the database trait here, as we have to check, if file with database already exists
-final class InjectData
+final class ResetDatabase
 {
     public static function createDatabase(): void
     {
@@ -30,7 +30,7 @@ final class InjectData
             $table = new Table($tableName);
             $schema = $structure['schema'];
             foreach ($schema as $columnName => $columnType) {
-                $table->addColumn($columnName, $columnType);
+                $table->addColumn($columnName, $columnType, ['notnull' => false]);
             }
             $schemaManager->createTable($table);
 

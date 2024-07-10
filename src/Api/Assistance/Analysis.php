@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Capito\Assistance;
+namespace Capito\Api\Assistance;
 
 use Capito\Authorization\AuthorizeAccountId;
 use Psr\Http\Message\ResponseInterface;

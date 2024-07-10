@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Capito\Assistance;
+namespace Capito\Api\Assistance;
 
 use Capito\Authorization\AuthorizeAccountId;
 use Psr\Http\Message\ResponseInterface;
@@ -18,11 +18,13 @@ final readonly class Tokens extends AuthorizeAccountId
     protected function handle(ServerRequestInterface $request, ResponseInterface $response, array $arguments): ResponseInterface
     {
         $tokens = [
-            [
-                'locations' => [
-                    [
-                        'start' => 51,
-                        'length' => 13,
+            'tokens' => [
+                [
+                    'locations' => [
+                        [
+                            'start' => 51,
+                            'length' => 13,
+                        ],
                     ],
                 ],
             ],
