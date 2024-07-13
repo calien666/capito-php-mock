@@ -30,7 +30,7 @@ final class Verify extends AbstractRequestHandler
 
     protected function handle(ServerRequestInterface $request, ResponseInterface $response, array $arguments): ResponseInterface
     {
-        $params = $request->getParsedBody();
+        $params = $request->getParsedBody() ?? [];
         $token = $params['token'] ?? '';
         if (strlen($token) === 0) {
             $response->write('Bad request');
@@ -51,7 +51,7 @@ final class Verify extends AbstractRequestHandler
                 'users',
                 'users.account_id = token.user'
             )
-            ->where('token.token', $queryBuilder->createNamedParameter($token))
+            ->where('token.verify_token', $queryBuilder->createNamedParameter($token))
             ->setMaxResults(1);
         $result = $statement->executeQuery()->fetchOne();
 

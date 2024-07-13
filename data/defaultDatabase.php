@@ -46,6 +46,7 @@ return [
             'type' => Types::INTEGER,
             'is_verified' => Types::BOOLEAN,
             'token' => Types::STRING,
+            'verify_token' => Types::STRING,
         ],
         'values' => [
             [
@@ -58,7 +59,8 @@ return [
                 'type' => 1,
                 'is_verified' => true,
                 'id' => 'capito|123',
-                'token' => '01J2FDAXFVW2NHBC9G0F5CA94P'
+                'token' => '01J2FDAXFVW2NHBC9G0F5CA94P',
+                'verify_token' => null,
             ],
             [
                 'email' => 'jane.doe@example.com',
@@ -70,7 +72,8 @@ return [
                 'type' => 1,
                 'is_verified' => false,
                 'id' => 'capito|234',
-                'token' => '01J2FDBBTB0VCHRDQFM61HZ7A7'
+                'token' => '01J2FDBBTB0VCHRDQFM61HZ7A7',
+                'verify_token' => 'clykggq5i0000ve502c09505j',
             ],
         ],
     ],
