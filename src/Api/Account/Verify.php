@@ -16,7 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * @verification none
  * @api /v2/account/verify
  */
-final readonly class Verify extends AbstractRequestHandler
+final class Verify extends AbstractRequestHandler
 {
     use DatabaseTrait;
 

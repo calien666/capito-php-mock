@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * @verification none
  * @api /v2/account
  */
-final readonly class NewAccount extends AbstractAccount
+final class NewAccount extends AbstractAccount
 {
     use DatabaseTrait;
 

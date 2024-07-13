@@ -13,7 +13,7 @@ use Doctrine\DBAL\Tools\DsnParser;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract readonly class AuthorizeAccountId extends AbstractRequestHandler
+abstract class AuthorizeAccountId extends AbstractRequestHandler
 {
     use DatabaseTrait;
     protected const bool OVERRIDE = true;

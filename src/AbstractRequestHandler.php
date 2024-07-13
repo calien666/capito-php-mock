@@ -7,7 +7,7 @@ namespace Capito;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-abstract readonly class AbstractRequestHandler
+abstract class AbstractRequestHandler
 {
     protected const array ALLOWED = [];
 

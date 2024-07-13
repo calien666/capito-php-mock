@@ -32,7 +32,7 @@ class AuthorizeClient implements MiddlewareInterface
         $apiPath = $request->getRequestTarget();
         if (!in_array($apiPath, self::IGNORE_VALIDATION, true)) {
             $authHeader = $request->getHeader('Authorization')[0] ?? '';
-            if (!str_starts_with($authHeader[0], 'Bearer ')) {
+            if (!str_starts_with($authHeader, 'Bearer ')) {
                 return $this->createUnauthorizedResponse();
             }
 
@@ -43,7 +43,7 @@ class AuthorizeClient implements MiddlewareInterface
 
             $queryBuilder = $this->connection->createQueryBuilder();
             $query = $queryBuilder
-                ->select('users.*', 'DISTINCT GROUP_CONCAT(roles.role) AS role')
+                ->select('users.*', 'GROUP_CONCAT(roles.role) AS role')
                 ->from('users')
                 ->join(
                     'users',
@@ -72,7 +72,7 @@ class AuthorizeClient implements MiddlewareInterface
                 $row['id'],
                 in_array('admin', $roles, true),
                 in_array('member', $roles, true),
-                $row['is_verified']
+                $row['is_verified'] === 1 || $row['is_verified'] === true
             );
             $request = $request->withAttribute('user', $user);
         }

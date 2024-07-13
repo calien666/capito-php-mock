@@ -8,7 +8,7 @@ use Capito\Authorization\AuthorizeAccountId;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final readonly class Tokens extends AuthorizeAccountId
+final class Tokens extends AuthorizeAccountId
 {
     protected const array ALLOWED = [
         'OPTIONS',

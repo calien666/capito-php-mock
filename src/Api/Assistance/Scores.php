@@ -8,7 +8,7 @@ use Capito\Authorization\AuthorizeAccountId;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final readonly class Scores extends AuthorizeAccountId
+final class Scores extends AuthorizeAccountId
 {
     protected const array ALLOWED = [
         'OPTIONS',

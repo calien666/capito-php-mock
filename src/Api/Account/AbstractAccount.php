@@ -6,7 +6,7 @@ namespace Capito\Api\Account;
 
 use Capito\AbstractRequestHandler;
 
-abstract readonly class AbstractAccount extends AbstractRequestHandler
+abstract class AbstractAccount extends AbstractRequestHandler
 {
 
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Capito\Model;
 
-final readonly class User
+final class User
 {
     public function __construct(
         private string $email,

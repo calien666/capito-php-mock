@@ -16,7 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * @api /v2/account/{account-id}/trigger-verification
  */
-final readonly class TriggerVerification extends AuthorizeAccountId
+final class TriggerVerification extends AuthorizeAccountId
 {
     use DatabaseTrait;
 
