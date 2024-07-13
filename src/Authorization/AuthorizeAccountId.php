@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Capito\Authorization;
 
 use Capito\AbstractRequestHandler;
-use Capito\Configuration;
 use Capito\DatabaseTrait;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Tools\DsnParser;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

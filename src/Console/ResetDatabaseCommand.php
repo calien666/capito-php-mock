@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Capito\Console;
 
 use Capito\Configuration;
-use Capito\TestData\ResetDatabase;
+use Capito\Database\ResetDatabase;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -43,11 +43,7 @@ class ResetDatabaseCommand extends Command
             $io->info('Reset aborted. You have to explicit allow the reset');
             return Command::SUCCESS;
         }
-        $dbFileName = Configuration::getAppDir() . '/db.sqlite';
-        if (file_exists($dbFileName)) {
-            unlink($dbFileName);
-        }
-        ResetDatabase::createDatabase();
+        ResetDatabase::reset();
         return Command::SUCCESS;
     }
 

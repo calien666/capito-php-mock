@@ -12,11 +12,14 @@ use Capito\Api\Assistance\Scores;
 use Capito\Api\Assistance\Tokens;
 use Capito\Api\Translation;
 use Capito\Authorization\AuthorizeClient;
+use Capito\Middleware\ResetMiddleware;
 use Slim\Factory\AppFactory;
 
 // Instantiate App
 $app = AppFactory::create();
 $app->addMiddleware((new AuthorizeClient()));
+
+$app->add(new ResetMiddleware());
 
 $app->any('/v2/account', NewAccount::class);
 $app->any('/v2/account/verify', Verify::class);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Capito\TestData;
+namespace Capito\Database;
 
 use Capito\Configuration;
 use Doctrine\DBAL\DriverManager;
@@ -13,6 +13,18 @@ use Doctrine\DBAL\Types\Type;
 // we do NOT use the database trait here, as we have to check, if file with database already exists
 final class ResetDatabase
 {
+    public static function reset(): void
+    {
+        ResetDatabase::deleteDatabase();
+        ResetDatabase::createDatabase();
+    }
+    public static function deleteDatabase(): void
+    {
+        $dbFileName = Configuration::getAppDir() . '/db.sqlite';
+        if (file_exists($dbFileName)) {
+            unlink($dbFileName);
+        }
+    }
     public static function createDatabase(): void
     {
         if (file_exists(Configuration::getAppDir() . '/db.sqlite')) {
