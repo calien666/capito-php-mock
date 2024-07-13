@@ -40,9 +40,11 @@ final class NewAccount extends AbstractAccount
         $statement = $queryBuilder
             ->select('count(*)')
             ->from('users')
-            ->where('email', $queryBuilder->createNamedParameter($email));
+            ->where(
+                $queryBuilder->expr()->eq('email', $queryBuilder->createNamedParameter($email))
+            );
 
-        $result = $statement->executeQuery()->fetchNumeric();
+        $result = $statement->executeQuery()->fetchOne();
         if ($result > 0) {
             $response->write('Conflict (account already exists)');
             return $response->withHeader('Content-Type', 'text/plain')->withStatus(409);

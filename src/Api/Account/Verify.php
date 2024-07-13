@@ -51,9 +51,11 @@ final class Verify extends AbstractRequestHandler
                 'users',
                 'users.account_id = token.user'
             )
-            ->where('token.verify_token', $queryBuilder->createNamedParameter($token))
+            ->where(
+                $queryBuilder->expr()->eq('token.token', $queryBuilder->createNamedParameter($token))
+            )
             ->setMaxResults(1);
-        $result = $statement->executeQuery()->fetchOne();
+        $result = $statement->executeQuery()->fetchAssociative();
 
         // return 404 if token not found
         if ($result === false) {
