@@ -49,7 +49,7 @@ class AuthorizeClient implements MiddlewareInterface
                     'users',
                     'users_roles',
                     'users_roles',
-                    'users.account_id=users_roles.account_id'
+                    'users.id=users_roles.user_id'
                 )
                 ->join(
                     'users_roles',
@@ -57,7 +57,7 @@ class AuthorizeClient implements MiddlewareInterface
                     'roles',
                     'users_roles.role=roles.id'
                 )
-                ->where($queryBuilder->expr()->eq('users.token', $queryBuilder->createNamedParameter($token)))
+                ->where($queryBuilder->expr()->eq('users.bearer', $queryBuilder->createNamedParameter($token)))
                 ->setMaxResults(1);
             $row = $query->executeQuery()->fetchAssociative();
             if ($row === false) {
